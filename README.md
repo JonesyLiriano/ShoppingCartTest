@@ -20,6 +20,7 @@ Net. Core: 3.1
 ## Configuraciones
 
 Angular: La url de la web api esta en la variable enviroment ("http://localhost:21177").
+Net Core: La Cadena de conexion esta en el archivo appsettings.json ("DevConnectionString").
 
 ## Librerias utilizadas
 
