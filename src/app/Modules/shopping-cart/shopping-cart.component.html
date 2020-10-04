@@ -1,0 +1,73 @@
+<h2>Shopping Cart</h2>
+<form [formGroup]="ShoppingCartForm">
+  <mat-card>
+    <mat-form-field appearance="fill">
+      <mat-label>Customer</mat-label>
+      <mat-select formControlName="CustomerId" (selectionChange)="CustomerSelected($event)" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let customer of CustomersList" [value]="customer.id">
+          {{customer.fullName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="ShoppingCartForm.get('CustomerId').value == null">Please choose a Customer</mat-error>
+    </mat-form-field>
+    <mat-label class="margin-right-40px">Credit Limit: ${{customerCreditLimit}}</mat-label>
+    <mat-checkbox formControlName="CreditInvoice">Credit Invoice</mat-checkbox>
+    <h2 class="fill-remaining-space">Orden: #{{orderNumber}}</h2>
+    </mat-card>
+  <div formArrayName="Products">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Description</th>
+        <th scope="col">Available</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let productRow of Products.controls; let index = index" [formGroupName]="index">
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="ProductCode" (selectionChange)="ProductSelected($event, index)" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let product of ProductsList" [value]="product.id">
+                {{product.description}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="Products.value[index]['ProductCode'] == null">Please choose a Product</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <input formControlName="Available" readonly />
+        </td>
+        <td>
+          <input formControlName="Price" readonly/>
+        </td>
+        <td>
+          <input formControlName="Qty" type="number" (change)="UpdateTotalValue($event, index)" required/>
+        </td>
+        <td>
+          <input formControlName="Total" readonly/>
+        </td>
+        <td>
+          <button mat-raised-button color="warn" (click)="DeleteFormRow(index)">
+            Delete Product <mat-icon>delete_outline</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <h2 class="fill-remaining-space">Shopping Cart Amount: ${{shoppingCartTotal}}</h2>
+  <button mat-raised-button type="button" (click)="AddFormRow()">
+    Add Product Row <mat-icon>add</mat-icon>
+  </button>
+  <button mat-raised-button color="primary" type="button" (click)="GenerateOrderOrInvoice()" [disabled]="ShoppingCartForm.invalid">
+    {{orderNumber != null? 'Generate Invoice': 'Generate Order'}} <mat-icon>save</mat-icon>
+    </button>
+
+</form>
+

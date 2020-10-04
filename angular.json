@@ -24,6 +24,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -88,6 +90,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +122,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ShoppingTest"
+    }
+  },
+  "defaultProject": "ShoppingTest",
+  "cli": {
+    "analytics": "ce392ce0-9c3a-4e15-9abe-7c84f547a463"
+  }
 }

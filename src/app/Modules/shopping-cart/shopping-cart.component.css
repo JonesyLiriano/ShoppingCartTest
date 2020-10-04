@@ -1,0 +1,7 @@
+.margin-right-40px {
+  margin-right: 40px;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,41 @@
+<h2>Customers CRUD</h2>
+<form [formGroup]="CustomerForm">
+  <div formArrayName="Customers">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Document Number</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Credit Limit</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customerRow of Customer.controls; let index = index" [formGroupName]="index">
+        <td>
+          <input formControlName="Id" readonly/>
+        </td>
+        <td>
+          <input formControlName="DocumentNumber" required />
+        </td>
+        <td>
+          <input formControlName="FullName" required/>
+        </td>
+        <td>
+          <input formControlName="CreditLimit" required/>
+        </td>
+        <td>
+          <button mat-raised-button [disabled]="Customer.controls[index].invalid" type="button" (click)="AddOrUpdateCustomer(index)">
+            {{ValidateCustormerID(index)? updateButtonText: registerButtonText}} <mat-icon>{{ValidateCustormerID(index)? 'save':'add'}}</mat-icon>
+          </button>
+          <button mat-raised-button color="warn" (click)="DeleteFormRow(index)">
+            Delete Customer <mat-icon>delete_outline</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</form>
+
