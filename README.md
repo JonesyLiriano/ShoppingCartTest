@@ -1,6 +1,6 @@
 # Versiones
 
-Angular: 9
+Angular: 10.1.6
 Net. Core: 3.1
 
 ## TODO LIST
